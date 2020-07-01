@@ -16,7 +16,7 @@ const menuItems = [
       visible: 'protected'
     },
     {
-      link: '/account',
+      link: '/profile',
       title: 'Настройки пользователя',
       visible: 'protected'
     },

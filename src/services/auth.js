@@ -18,7 +18,7 @@ export const login = async (payload, { dispatch, history }) => {
     dispatch(createSetErrorMessagesAction({}));
     setToken(data.token);
     dispatch(createSetIsLoggedAction(true));
-    history.push('/account');
+    history.push('/profile');
   } catch (e) {
     dispatch(createSetErrorMessagesAction(e.errors));
   }

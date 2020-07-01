@@ -5,6 +5,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 // Pages
 import IndexPage from '../pages/public/IndexPage';
 import LoginPage from '../pages/public/LoginPage';
+import ProfilePage from '../pages/account/ProfilePage';
 // Components
 import Menu from '../Menu';
 
@@ -29,6 +30,7 @@ const Routes = () => {
             <Col>
               <Route path="/" exact component={IndexPage} />
               <Route path="/login" exact component={LoginPage} />
+              <Route path="/profile" exact component={ProfilePage} />
             </Col>
           </Row>
           <Row className="footer">

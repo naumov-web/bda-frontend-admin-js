@@ -1,16 +1,19 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import { getProtectedMenuItems, getPublicMenuItems } from '../../config/menu';
 
+import './styles.sass';
+
 export default () => {
 
-  const isLogged = false;
+  const isLogged = useSelector(state => state.auth.isLogged);
   const filteredItems = isLogged ? getProtectedMenuItems() : getPublicMenuItems();
 
   return (
-    <Nav className="justify-content-center">
+    <Nav className="justify-content-center menu">
       {filteredItems.map(menuItem => <Nav.Item key={menuItem.key}>
         <Link to={menuItem.link}>
           {menuItem.title}
