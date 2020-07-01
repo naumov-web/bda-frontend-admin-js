@@ -24,7 +24,7 @@ export default () => {
   };
 
   return (
-    <div className="login-page center-content-page">
+    <div className="login-page center-content-page page">
       <div className="content-inner">
         <FormContainer>
           <>

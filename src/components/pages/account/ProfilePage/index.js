@@ -33,7 +33,7 @@ export default () => {
   };
 
   return (
-    <div className="profile-page center-content-page">
+    <div className="profile-page center-content-page page">
       <div className="content-inner">
         <FormContainer>
           <>
