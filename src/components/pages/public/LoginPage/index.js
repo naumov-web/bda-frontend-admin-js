@@ -11,7 +11,7 @@ export default () => {
   const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
   const isLoading = useSelector(state => state.auth.isLoading);
-  const errorMessage = useSelector(state => state.auth.serverError);
+  const errorMessages = useSelector(state => state.auth.errorMessages);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -31,8 +31,8 @@ export default () => {
             <h2>Авторизация</h2>
               <Form className="narrow-form" onSubmit={handle}>
                 <>
-                  {errorMessage && <Alert variant="danger">
-                    {errorMessage}
+                  {errorMessages.email && <Alert variant="danger">
+                    {errorMessages.email}
                   </Alert>}
                   <Form.Group controlId="email">
                     <Form.Label>Email:</Form.Label>

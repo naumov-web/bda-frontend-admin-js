@@ -6,8 +6,11 @@ import { Container, Row, Col } from 'react-bootstrap';
 import IndexPage from '../pages/public/IndexPage';
 import LoginPage from '../pages/public/LoginPage';
 import ProfilePage from '../pages/account/ProfilePage';
+import LogoutPage from '../pages/account/LogoutPage';
+import HandbookDataSourcesPage from '../pages/account/HandbookDataSourcesPage';
 // Components
 import Menu from '../Menu';
+import AccountGuard from '../hocs/AccountGuard';
 
 import './styles.sass';
 
@@ -30,7 +33,11 @@ const Routes = () => {
             <Col>
               <Route path="/" exact component={IndexPage} />
               <Route path="/login" exact component={LoginPage} />
-              <Route path="/profile" exact component={ProfilePage} />
+              <AccountGuard>
+                <Route path="/profile" exact component={ProfilePage} />
+                <Route path="/logout" exact component={LogoutPage} />
+                <Route path="/handbook/data-sources" exact component={HandbookDataSourcesPage} />
+              </AccountGuard>
             </Col>
           </Row>
           <Row className="footer">

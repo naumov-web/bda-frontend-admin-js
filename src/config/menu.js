@@ -11,7 +11,7 @@ const menuItems = [
       visible: 'protected'
     },
     {
-      link: '/handbooks/data-sources',
+      link: '/handbook/data-sources',
       title: 'Справочники',
       visible: 'protected'
     },

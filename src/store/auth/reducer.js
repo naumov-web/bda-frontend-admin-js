@@ -6,8 +6,7 @@ import { getToken } from '../../utils/localStorage/token';
 const initialState = Immutable({
   errorMessages: {},
   isLogged: Boolean(getToken()),
-  isLoading: false,
-  serverError: null
+  isLoading: false
 });
 
 // Reducer

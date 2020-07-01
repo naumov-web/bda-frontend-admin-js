@@ -8,7 +8,6 @@ import { load, update } from '../../../../services/profile';
 export default () => {
 
   const isLoading = useSelector(state => state.profile.isLoading);
-  const errorMessage = useSelector(state => state.profile.serverError);
   const successMessage = useSelector(state => state.profile.successMessage);
   const user = useSelector(state => state.profile.user);
 
