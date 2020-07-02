@@ -25,7 +25,7 @@ export const load = async ({ dispatch }) => {
 export const update = async (payload, { dispatch }) => {
   dispatch(createSetIsLoadingAction(true));
   try {
-    const data = await updateProfile(payload);
+    await updateProfile(payload);
     dispatch(createSetSuccessMessageAction(successMessages.profileSaveSuccess));
   } catch (e) {
   }

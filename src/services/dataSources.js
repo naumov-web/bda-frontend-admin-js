@@ -1,6 +1,7 @@
 // Redux methods
 import { 
-  createSetIsLoadingAction
+  createSetIsLoadingAction,
+  createSetDataSourcesAction
 } from '../store/dataSources/actionCreators';
 
 // API methods
@@ -10,7 +11,7 @@ export const load = async ({ dispatch }) => {
   dispatch(createSetIsLoadingAction(true));
   try {
     const data = await getDataSources();
-    
+    dispatch(createSetDataSourcesAction(data.items, data.count));
   } catch (e) {
   }
   dispatch(createSetIsLoadingAction(false));

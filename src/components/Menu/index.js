@@ -14,7 +14,7 @@ export default () => {
 
   return (
     <Nav className="justify-content-center menu">
-      {filteredItems.map(menuItem => <Nav.Item key={menuItem.key}>
+      {filteredItems.map(menuItem => <Nav.Item key={menuItem.link}>
         <Link to={menuItem.link}>
           {menuItem.title}
         </Link>
