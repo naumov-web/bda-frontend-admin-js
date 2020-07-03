@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import queryString from 'query-string';
 // Components
 import HandbookMenu from '../../../HandbookMenu';
 import Table from '../../../Table';
@@ -22,8 +24,10 @@ export default () => {
       sortable: true
     }
   ];
+  const baseUrl = '/handbook/data-sources';
 
   const dispatch = useDispatch();
+  const history = useHistory();
   const dataSources = useSelector(state => state.dataSources.dataSources);
   const pagination = useSelector(
     state => ({
@@ -33,16 +37,39 @@ export default () => {
       sortDirection: state.dataSources.sortDirection,
     })
   );
+  const defaultPagination = useSelector(state => state.dataSources.defaultPagination);
 
   useEffect(() => {
-    load({
-      dispatch
-    });
+    if (history.location.search) {
+      const params = queryString.parse(history.location.search);
+
+      load(params, {
+        dispatch
+      });
+    } else {
+      load(pagination, {
+        dispatch
+      });
+    }
+
+    history.listen(
+      location => {
+        if (location.pathname === baseUrl && location.search !== '') {
+          const params = queryString.parse(history.location.search);
+
+          load(params, {
+            dispatch
+          });
+        }
+        if (location.pathname === baseUrl && location.search === '') {
+          load(defaultPagination, {
+            dispatch
+          });
+        }
+      }
+    );
+    
   }, []);
-
-  const handleSort = (column, direction) => {
-
-  };
 
   return <div className="handbook-data-sources-page wide-page page list-page">
     <HandbookMenu />
@@ -50,9 +77,8 @@ export default () => {
     <Table 
       columns={columns}
       items={dataSources}
-      onSortChange={handleSort}
-      sortBy={pagination.sortBy}
-      sortDirection={pagination.sortDirection}
+      {...pagination}
+      baseUrl={baseUrl}
     />
   </div>;
 }

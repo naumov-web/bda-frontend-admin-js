@@ -7,7 +7,8 @@ const initialState = Immutable({
   dataSources: [],
   count: 0,
   isLoading: false,
-  ...defaultPagination
+  ...defaultPagination,
+  defaultPagination
 });
 
 // Reducer
