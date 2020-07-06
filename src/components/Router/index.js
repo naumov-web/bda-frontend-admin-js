@@ -8,6 +8,7 @@ import LoginPage from '../pages/public/LoginPage';
 import ProfilePage from '../pages/account/ProfilePage';
 import LogoutPage from '../pages/account/LogoutPage';
 import HandbookDataSourcesPage from '../pages/account/HandbookDataSourcesPage';
+import HandbookProductsPage from '../pages/account/HandbookProductsPage';
 // Components
 import Menu from '../Menu';
 import AccountGuard from '../hocs/AccountGuard';
@@ -37,6 +38,7 @@ const Routes = () => {
                 <Route path="/profile" exact component={ProfilePage} />
                 <Route path="/logout" exact component={LogoutPage} />
                 <Route path="/handbook/data-sources" exact component={HandbookDataSourcesPage} />
+                <Route path="/handbook/products" exact component={HandbookProductsPage} />
               </AccountGuard>
             </Col>
           </Row>

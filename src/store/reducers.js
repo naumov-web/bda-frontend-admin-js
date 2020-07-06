@@ -1,9 +1,11 @@
 import auth from './auth/reducer';
 import profile from './profile/reducer';
 import dataSources from './dataSources/reducer';
+import products from './products/reducer';
 
 export {
     auth,
     profile,
-    dataSources
+    dataSources,
+    products
 };
