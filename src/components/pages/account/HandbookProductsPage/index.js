@@ -9,6 +9,7 @@ import Table from '../../../Table';
 import { load } from '../../../../services/products';
 // Styles
 import './styles.sass';
+import Pagination from '../../../Pagination';
 
 export default () => {
 
@@ -39,6 +40,7 @@ export default () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const products = useSelector(state => state.products.products);
+  const count = useSelector(state => state.products.count);
   const pagination = useSelector(
     state => ({
       limit: state.products.limit,
@@ -81,6 +83,13 @@ export default () => {
     
   }, []);
 
+  const getLink = ({sortBy, sortDirection, limit, offset, baseUrl}) => 
+  `${baseUrl}?limit=${limit}&offset=${offset}&sort_by=${sortBy}&sort_direction=${sortDirection}`;
+
+  const onChangePage = (params) => {
+    history.push(getLink(params));
+  };
+
   return <div className="handbook-products-page wide-page page list-page">
     <HandbookMenu />
     <h3>Товары</h3>
@@ -89,6 +98,12 @@ export default () => {
       items={products}
       {...pagination}
       baseUrl={baseUrl}
+    />
+    <Pagination 
+      {...pagination}
+      count={count}
+      baseUrl={baseUrl}
+      onChangePage={onChangePage}
     />
   </div>;
 };

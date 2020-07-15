@@ -3,9 +3,6 @@ import { Pagination } from 'react-bootstrap';
 
 const currentPageOffset = 5;
 
-const getLink = ({sortBy, sortDirection, limit, offset, baseUrl}) => 
-  `${baseUrl}?limit=${limit}&offset=${offset}&sort_by=${sortBy}&sort_direction=${sortDirection}`;
-
 export default ({ count, sortBy, sortDirection, limit, offset, baseUrl, onChangePage }) => {
   if (count <= limit) {
     return null;
@@ -25,29 +22,28 @@ export default ({ count, sortBy, sortDirection, limit, offset, baseUrl, onChange
     {(currentPage - currentPageOffset > 2) && (
       <>
         <Pagination.First
-          link={getLink({ sortBy, sortDirection, limit, offset: 0, baseUrl })}  
-          onClick={onChangePage}
+          onClick={() => onChangePage({ sortBy, sortDirection, limit, offset: 0, baseUrl })}
         />
         <Pagination.Ellipsis />
       </>
     )}
 
     {pageNumbers.map((number) => {  
-      const url = getLink({ sortBy, sortDirection, limit, offset: (number - 1) * limit, baseUrl });
-
       return <Pagination.Item
-        link={url}
-        onClick={onChangePage}
+        onClick={() => onChangePage({ sortBy, sortDirection, limit, offset: (number - 1) * limit, baseUrl })}
         active={number === currentPage}
-      />
+      >{number}</Pagination.Item>
     })}
 
     {(currentPage + currentPageOffset < pagesCount - 2) && (
       <>
         <Pagination.Ellipsis />
         <Pagination.Last 
-          link={getLink({ sortBy, sortDirection, limit, offset: (pagesCount - 1) * limit, baseUrl })}  
-          onClick={onChangePage}
+          onClick={
+            () => onChangePage(
+              { sortBy, sortDirection, limit, offset: (pagesCount - 1) * limit, baseUrl }
+            )
+          }
         />
       </>
     )}
