@@ -1,0 +1,1 @@
+export const SET_PRODUCT_PRIORITIES = 'handbooks.set_product_priorities';

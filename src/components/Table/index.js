@@ -11,7 +11,7 @@ export default ({ columns, items, onSortChange, sortBy, sortDirection, limit, of
 
   const rows = items.map(item => <tr key={`row-${item.id}`}>
     {columns.map((column, index) => <td key={`cell-${index}-${item.id}`}>
-      {column.field ? item[column.field] : null}
+      {column.field ? item[column.field] : column.render(item)}
     </td>)}
   </tr>);
 

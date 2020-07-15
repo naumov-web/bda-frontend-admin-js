@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import queryString from 'query-string';
+import { Form } from 'react-bootstrap';
 // Components
 import HandbookMenu from '../../../HandbookMenu';
 import Table from '../../../Table';
@@ -12,6 +13,10 @@ import './styles.sass';
 import Pagination from '../../../Pagination';
 
 export default () => {
+
+  const onChangePriority = (item, priority_id) => {
+
+  };
 
   const columns = [
     {
@@ -34,6 +39,15 @@ export default () => {
       title: 'Внешний код',
       sortable: true
     },
+    {
+      title: 'Приоритет обработки',
+      sortable: false,
+      render: (item) => {
+        return <>
+          <Form.Control as="select"></Form.Control>
+        </>;
+      }
+    }
   ];
   const baseUrl = '/handbook/products';
 
