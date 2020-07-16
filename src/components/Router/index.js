@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Switch, Route } from "react-router-dom";
 import { Container, Row, Col } from 'react-bootstrap';
 
@@ -12,10 +13,17 @@ import HandbookProductsPage from '../pages/account/HandbookProductsPage';
 // Components
 import Menu from '../Menu';
 import AccountGuard from '../hocs/AccountGuard';
+// Services
+import { load } from '../../services/handbooks';
 
 import './styles.sass';
 
 const Routes = () => {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => load({ dispatch }), []);
+
   return (
     <>
       <Switch>
