@@ -7,7 +7,7 @@ import {
 } from '../store/products/actionCreators';
 
 // API methods
-import { getProducts } from '../utils/apis/products.api';
+import { getProducts, setPriority as setPriorityRequest } from '../utils/apis/products.api';
 
 export const load = async (params, { dispatch }) => {
   dispatch(createSetIsLoadingAction(true));
@@ -18,4 +18,15 @@ export const load = async (params, { dispatch }) => {
   } catch (e) {
   }
   dispatch(createSetIsLoadingAction(false));
+};
+
+export const setPriority = async(productId, priorityId, { dispatch }) => {
+  try {
+    await setPriorityRequest({
+      productId,
+      priorityId
+    });
+  } catch (e) {
+
+  }
 };

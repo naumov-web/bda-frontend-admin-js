@@ -22,7 +22,13 @@ const Routes = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => load({ dispatch }), []);
+  useEffect(() => {
+      const fetch = async () => load({ dispatch });
+
+      fetch();
+    }, 
+    []
+  );
 
   return (
     <>

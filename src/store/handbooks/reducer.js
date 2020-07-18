@@ -3,7 +3,7 @@ import { SET_PRODUCT_PRIORITIES } from './actionTypes';
 
 // Initial state
 const initialState = Immutable({
-  product_priorities: []
+  productPriorities: []
 });
 
 // Reducer
@@ -11,7 +11,7 @@ export default function reduce(state = initialState, action = {}) {
   switch(action.type) {
     case SET_PRODUCT_PRIORITIES:
       return state.merge({
-          products: action.products,
+          productPriorities: action.productPriorities,
           count: action.count
       });
     default:

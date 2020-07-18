@@ -7,15 +7,32 @@ import { Form } from 'react-bootstrap';
 import HandbookMenu from '../../../HandbookMenu';
 import Table from '../../../Table';
 // Services
-import { load } from '../../../../services/products';
+import { load, setPriority } from '../../../../services/products';
 // Styles
 import './styles.sass';
 import Pagination from '../../../Pagination';
 
 export default () => {
 
-  const onChangePriority = (item, priority_id) => {
+  const baseUrl = '/handbook/products';
 
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const productPriorities = useSelector(state => state.handbooks.productPriorities);
+  const products = useSelector(state => state.products.products);
+  const count = useSelector(state => state.products.count);
+  const pagination = useSelector(
+    state => ({
+      limit: state.products.limit,
+      offset: state.products.offset,
+      sortBy: state.products.sortBy,
+      sortDirection: state.products.sortDirection,
+    })
+  );
+  const defaultPagination = useSelector(state => state.products.defaultPagination);
+
+  const onChangePriority = (item, priorityId) => {
+    setPriority(item.id, priorityId, { dispatch });
   };
 
   const columns = [
@@ -44,26 +61,25 @@ export default () => {
       sortable: false,
       render: (item) => {
         return <>
-          <Form.Control as="select"></Form.Control>
+          <Form.Control 
+            as="select" 
+            className={item.priority_id > 1 ? 'bg-success' : ''} 
+            onChange={e => onChangePriority(item, e.target.value)}
+            defaultValue={item.priority_id}
+          >
+            {productPriorities.map(
+              productPriority => <option 
+                key={item.id + '-' + productPriority.id} 
+                value={productPriority.id}
+              >
+                {productPriority.name}
+              </option>
+            )}
+          </Form.Control>
         </>;
       }
     }
   ];
-  const baseUrl = '/handbook/products';
-
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const products = useSelector(state => state.products.products);
-  const count = useSelector(state => state.products.count);
-  const pagination = useSelector(
-    state => ({
-      limit: state.products.limit,
-      offset: state.products.offset,
-      sortBy: state.products.sortBy,
-      sortDirection: state.products.sortDirection,
-    })
-  );
-  const defaultPagination = useSelector(state => state.products.defaultPagination);
 
   useEffect(() => {
     if (history.location.search) {

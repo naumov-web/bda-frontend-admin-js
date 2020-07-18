@@ -30,6 +30,7 @@ export default ({ count, sortBy, sortDirection, limit, offset, baseUrl, onChange
 
     {pageNumbers.map((number) => {  
       return <Pagination.Item
+        key={`page-${number}`}
         onClick={() => onChangePage({ sortBy, sortDirection, limit, offset: (number - 1) * limit, baseUrl })}
         active={number === currentPage}
       >{number}</Pagination.Item>
