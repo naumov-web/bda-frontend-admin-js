@@ -6,7 +6,7 @@ const menuItems = [
       visible: 'public'
     },
     {
-      link: '/mined',
+      link: '/raw-data',
       title: 'Собранные данные',
       visible: 'protected'
     },

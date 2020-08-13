@@ -10,6 +10,7 @@ import ProfilePage from '../pages/account/ProfilePage';
 import LogoutPage from '../pages/account/LogoutPage';
 import HandbookDataSourcesPage from '../pages/account/HandbookDataSourcesPage';
 import HandbookProductsPage from '../pages/account/HandbookProductsPage';
+import RawDataPage from '../pages/account/RawDataPage';
 // Components
 import Menu from '../Menu';
 import AccountGuard from '../hocs/AccountGuard';
@@ -53,6 +54,7 @@ const Routes = () => {
                 <Route path="/logout" exact component={LogoutPage} />
                 <Route path="/handbook/data-sources" exact component={HandbookDataSourcesPage} />
                 <Route path="/handbook/products" exact component={HandbookProductsPage} />
+                <Route path="/raw-data" exact component={RawDataPage} />
               </AccountGuard>
             </Col>
           </Row>
