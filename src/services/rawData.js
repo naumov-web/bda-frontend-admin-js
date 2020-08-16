@@ -3,11 +3,12 @@ import camelcaseKeys from 'camelcase-keys';
 import { 
   createSetIsLoadingAction,
   createSetRawDataAction,
-  createSetPaginationAction
+  createSetPaginationAction,
+  createSetRawDataItemAction
 } from '../store/rawData/actionCreators';
 
 // API methods
-import { getRawData } from '../utils/apis/rawData.api';
+import { getRawData, getRawDataItem } from '../utils/apis/rawData.api';
 
 export const load = async (params, { dispatch }) => {
   dispatch(createSetIsLoadingAction(true));
@@ -18,4 +19,12 @@ export const load = async (params, { dispatch }) => {
   } catch (e) {
   }
   dispatch(createSetIsLoadingAction(false));
+};
+
+export const loadItem = async(id, { dispatch }) => {
+  try {
+    const data = await getRawDataItem(id);
+    dispatch(createSetRawDataItemAction(data));
+  } catch (e) {
+  }
 };

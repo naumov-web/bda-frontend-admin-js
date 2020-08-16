@@ -1,5 +1,5 @@
 import Immutable from 'seamless-immutable';
-import { SET_RAW_DATA, SET_IS_LOADING, SET_PAGINATION } from './actionTypes';
+import { SET_RAW_DATA, SET_RAW_DATA_ITEM, SET_IS_LOADING, SET_PAGINATION } from './actionTypes';
 import defaultPagination from '../../config/pagination';
 
 // Initial state
@@ -8,7 +8,8 @@ const initialState = Immutable({
   count: 0,
   isLoading: false,
   ...defaultPagination,
-  defaultPagination
+  defaultPagination,
+  rawDataItem: null
 });
 
 // Reducer
@@ -18,6 +19,10 @@ export default function reduce(state = initialState, action = {}) {
       return state.merge({
           rawData: action.rawData,
           count: action.count
+      });
+    case SET_RAW_DATA_ITEM:
+      return state.merge({
+          rawDataItem: action.rawDataItem
       });  
     case SET_IS_LOADING:
       return state.merge({
