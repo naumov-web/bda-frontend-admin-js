@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import queryString from 'query-string';
 import { Form } from 'react-bootstrap';
 // Components
@@ -76,6 +76,15 @@ export default () => {
               </option>
             )}
           </Form.Control>
+        </>;
+      }
+    },
+    {
+      title: '',
+      sortable: false,
+      render: (item) => {
+        return <>
+          <Link className="btn btn-sm btn-info" to={`/raw-data?product_id=${item.id}`}>Данные</Link>
         </>;
       }
     }

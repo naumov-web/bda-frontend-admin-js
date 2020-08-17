@@ -10,6 +10,8 @@ import { load } from '../../../../services/rawData';
 
 import Pagination from '../../../Pagination';
 
+import './styles.sass';
+
 export default () => {
 
   const baseUrl = '/raw-data';
@@ -101,7 +103,7 @@ export default () => {
     history.push(getLink(params));
   };
 
-  return <div className="mined-data-page wide-page page list-page">
+  return <div className="raw-data-page wide-page page list-page">
     <h3>Собранная информация</h3>
     <Table 
       columns={columns}
