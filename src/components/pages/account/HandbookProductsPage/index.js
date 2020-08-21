@@ -30,6 +30,7 @@ export default () => {
     })
   );
   const defaultPagination = useSelector(state => state.products.defaultPagination);
+  const rawDataDefaultPagination = useSelector(state => state.rawData.defaultPagination);
 
   const onChangePriority = (item, priorityId) => {
     setPriority(item.id, priorityId, { dispatch });
@@ -84,7 +85,10 @@ export default () => {
       sortable: false,
       render: (item) => {
         return <>
-          <Link className="btn btn-sm btn-info" to={`/raw-data?product_id=${item.id}`}>Данные</Link>
+          <Link 
+            className="btn btn-sm btn-info" 
+            to={`/raw-data?product_id=${item.id}&offset=0&limit=${rawDataDefaultPagination.limit}`}
+          >Данные</Link>
         </>;
       }
     }

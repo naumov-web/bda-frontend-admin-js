@@ -8,7 +8,10 @@ const initialState = Immutable({
   count: 0,
   isLoading: false,
   ...defaultPagination,
-  defaultPagination,
+  defaultPagination: {
+    ...defaultPagination,
+    limit: 100
+  },
   rawDataItem: null
 });
 
