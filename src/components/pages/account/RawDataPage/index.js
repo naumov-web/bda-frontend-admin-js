@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 // Components
 import Table from '../../../Table';
+import RawDataFilters from './Filters';
 // Services
 import { load } from '../../../../services/rawData';
 
@@ -16,6 +17,7 @@ export default () => {
 
   const baseUrl = '/raw-data';
 
+  const [isShowFilters, setIsShowFilters] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
   const rawData = useSelector(state => state.rawData.rawData);
@@ -105,6 +107,17 @@ export default () => {
 
   return <div className="raw-data-page wide-page page list-page">
     <h3>Собранная информация</h3>
+    <div className="filters-block">
+      <div className="filter-buttons-row">
+        {!isShowFilters && <button className="btn btn-sm btn-success" onClick={() => setIsShowFilters(true)}>
+          Показать фильтры
+        </button>}
+        {isShowFilters && <button className="btn btn-sm btn-warning" onClick={() => setIsShowFilters(false)}>
+          Скрыть фильтры
+        </button>}
+      </div>
+      {isShowFilters && <RawDataFilters />}
+    </div>
     <Table 
       columns={columns}
       items={rawData}
