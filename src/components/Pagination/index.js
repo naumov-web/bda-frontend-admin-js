@@ -3,7 +3,16 @@ import { Pagination } from 'react-bootstrap';
 
 const currentPageOffset = 5;
 
-export default ({ count, sortBy, sortDirection, limit, offset, baseUrl, onChangePage }) => {
+export default ({ 
+  count, 
+  sortBy, 
+  sortDirection, 
+  limit, 
+  offset, 
+  baseUrl, 
+  onChangePage,
+  queryParams 
+}) => {
   if (count <= limit) {
     return null;
   }
@@ -22,7 +31,7 @@ export default ({ count, sortBy, sortDirection, limit, offset, baseUrl, onChange
     {(currentPage - currentPageOffset > 2) && (
       <>
         <Pagination.First
-          onClick={() => onChangePage({ sortBy, sortDirection, limit, offset: 0, baseUrl })}
+          onClick={() => onChangePage({ ...queryParams, sortBy, sortDirection, limit, offset: 0, baseUrl })}
         />
         <Pagination.Ellipsis />
       </>
@@ -31,7 +40,7 @@ export default ({ count, sortBy, sortDirection, limit, offset, baseUrl, onChange
     {pageNumbers.map((number) => {  
       return <Pagination.Item
         key={`page-${number}`}
-        onClick={() => onChangePage({ sortBy, sortDirection, limit, offset: (number - 1) * limit, baseUrl })}
+        onClick={() => onChangePage({ ...queryParams, sortBy, sortDirection, limit, offset: (number - 1) * limit, baseUrl })}
         active={number === currentPage}
       >{number}</Pagination.Item>
     })}
@@ -42,7 +51,7 @@ export default ({ count, sortBy, sortDirection, limit, offset, baseUrl, onChange
         <Pagination.Last 
           onClick={
             () => onChangePage(
-              { sortBy, sortDirection, limit, offset: (pagesCount - 1) * limit, baseUrl }
+              { ...queryParams, sortBy, sortDirection, limit, offset: (pagesCount - 1) * limit, baseUrl }
             )
           }
         />

@@ -28,20 +28,18 @@ export default ({ baseUrl }) => {
     new Date(Date.parse(originQueryParams['date_time_to'])) :
     null
   );
-  const defaultPagination = useSelector(state => state.rawData.defaultPagination);
 
   const onSubmit = () => {
     const queryParams = {
-      limit: defaultPagination.limit,
-      offset: defaultPagination.offset
+      ...originQueryParams
     };
 
     if (dateTimeFrom) {
-      queryParams['date_time_from'] = dateFormat(dateTimeFrom, 'yyyy-mm-dd hh:MM:ss');
+      queryParams['date_time_from'] = dateFormat(dateTimeFrom, 'yyyy-mm-dd HH:MM:ss');
     }
 
     if (dateTimeTo) {
-      queryParams['date_time_to'] = dateFormat(dateTimeTo, 'yyyy-mm-dd hh:MM:ss');
+      queryParams['date_time_to'] = dateFormat(dateTimeTo, 'yyyy-mm-dd HH:MM:ss');
     }
 
     history.push(getLink(baseUrl, queryParams));

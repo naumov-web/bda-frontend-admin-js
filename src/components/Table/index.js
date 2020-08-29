@@ -1,11 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import FAIcon from 'react-fontawesome';
+import httpBuildQuery from 'http-build-query';
+import snakeCaseKeys from 'snakecase-keys';
+// Utils
+import { removeEmptyFields } from '../../utils/objects';
 
 import './styles.sass';
 
-const getLink = ({sortBy, sortDirection, limit, offset, baseUrl}) => 
-  `${baseUrl}?limit=${limit}&offset=${offset}&sort_by=${sortBy}&sort_direction=${sortDirection}`;
+const getLink = ({baseUrl, ...params}) => 
+    baseUrl + '?' + httpBuildQuery(
+      snakeCaseKeys(
+        removeEmptyFields(
+          params
+        )
+      )
+    );
 
 const getFieldValue = (item, field) => {
   const parts = field.split('.');
@@ -32,7 +42,17 @@ const getFieldValue = (item, field) => {
   }
 };
 
-export default ({ columns, items, onSortChange, sortBy, sortDirection, limit, offset, baseUrl }) => {
+export default ({ 
+  columns, 
+  items, 
+  onSortChange, 
+  sortBy, 
+  sortDirection, 
+  limit, 
+  offset, 
+  baseUrl,
+  queryParams
+ }) => {
 
   const rows = items.map(item => <tr key={`row-${item.id}`}>
     {columns.map((column, index) => <td key={`cell-${index}-${item.id}`}>
@@ -47,6 +67,7 @@ export default ({ columns, items, onSortChange, sortBy, sortDirection, limit, of
           {column.title ? column.title : ''}
           {column.sortable ? 
             <Link to={getLink({
+              ...queryParams,
               baseUrl,
               limit,
               offset,

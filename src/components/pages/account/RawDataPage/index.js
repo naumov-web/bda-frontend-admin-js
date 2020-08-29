@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import httpBuildQuery from 'http-build-query';
+import snakeCaseKeys from 'snakecase-keys';
 // Components
 import Table from '../../../Table';
 import RawDataFilters from './Filters';
@@ -103,8 +104,10 @@ export default () => {
 
   const getLink = ({baseUrl, ...params}) => 
     baseUrl + '?' + httpBuildQuery(
-      removeEmptyFields(
-        params
+      snakeCaseKeys(
+        removeEmptyFields(
+          params
+        )
       )
     );
 
@@ -130,12 +133,14 @@ export default () => {
       items={rawData}
       {...pagination}
       baseUrl={baseUrl}
+      queryParams={history.location.search ? queryString.parse(history.location.search) : {}}
     />
     <Pagination 
       {...pagination}
       count={count}
       baseUrl={baseUrl}
       onChangePage={onChangePage}
+      queryParams={history.location.search ? queryString.parse(history.location.search) : {}}
     />
   </div>;
 };
