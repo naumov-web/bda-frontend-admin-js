@@ -3,11 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
+import httpBuildQuery from 'http-build-query';
 // Components
 import Table from '../../../Table';
 import RawDataFilters from './Filters';
 // Services
 import { load } from '../../../../services/rawData';
+// Utils
+import { removeEmptyFields } from '../../../../utils/objects';
 
 import Pagination from '../../../Pagination';
 
@@ -98,8 +101,12 @@ export default () => {
     
   }, []);
 
-  const getLink = ({sortBy, sortDirection, limit, offset, baseUrl}) => 
-  `${baseUrl}?limit=${limit}&offset=${offset}&sort_by=${sortBy}&sort_direction=${sortDirection}`;
+  const getLink = ({baseUrl, ...params}) => 
+    baseUrl + '?' + httpBuildQuery(
+      removeEmptyFields(
+        params
+      )
+    );
 
   const onChangePage = (params) => {
     history.push(getLink(params));
@@ -116,7 +123,7 @@ export default () => {
           Скрыть фильтры
         </button>}
       </div>
-      {isShowFilters && <RawDataFilters />}
+      {isShowFilters && <RawDataFilters baseUrl={baseUrl} />}
     </div>
     <Table 
       columns={columns}

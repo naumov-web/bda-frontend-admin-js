@@ -1,0 +1,17 @@
+@import '../../../../../assets/styles/variables.sass'
+
+.raw-data-filters-row
+  display: grid
+  grid-template-columns: repeat(3, 1fr)
+  grid-column-gap: $default-margin
+  margin-bottom: $default-margin
+
+  .raw-data-filters-item
+    label
+      display: block
+
+    .react-datepicker-wrapper
+      width: 100%
+
+      input
+        width: 100%
