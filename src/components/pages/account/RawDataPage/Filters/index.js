@@ -118,6 +118,12 @@ export default ({ baseUrl }) => {
           }}
         />
       </div>
+      <div className="raw-data-filters-item">
+        <label>Источник информации:</label>
+      </div>
+      <div className="raw-data-filters-item">
+        <label>Задача:</label>
+      </div>
     </div>
     <div className="raw-data-buttons-row">
       <button className="btn btn-success btn-sm" onClick={onSubmit}>
