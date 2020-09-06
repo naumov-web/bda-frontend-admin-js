@@ -91,6 +91,18 @@ export default () => {
           >Данные</Link>
         </>;
       }
+    },
+    {
+      title: '',
+      sortable: false,
+      render: (item) => {
+        return <>
+          <Link 
+            className="btn btn-sm btn-warning" 
+            to={`/notes?product_id=${item.id}`}
+          >Заметки</Link>
+        </>;
+      }
     }
   ];
 
@@ -136,6 +148,11 @@ export default () => {
   return <div className="handbook-products-page wide-page page list-page">
     <HandbookMenu />
     <h3>Товары</h3>
+    <div className="filters-row">
+      <label htmlFor="only_with_notes">
+        <input type="checkbox" id="only_with_notes" /> Только с заметками
+      </label>
+    </div>
     <Table 
       columns={columns}
       items={products}

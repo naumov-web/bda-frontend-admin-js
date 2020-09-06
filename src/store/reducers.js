@@ -4,6 +4,7 @@ import dataSources from './dataSources/reducer';
 import products from './products/reducer';
 import handbooks from './handbooks/reducer';
 import rawData from './rawData/reducer';
+import notes from './notes/reducer';
 
 export {
     auth,
@@ -11,5 +12,6 @@ export {
     dataSources,
     products,
     handbooks,
-    rawData
+    rawData,
+    notes
 };
