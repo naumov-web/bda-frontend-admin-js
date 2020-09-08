@@ -5,7 +5,10 @@ import defaultPagination from '../../config/pagination';
 // Initial state
 const initialState = Immutable({
   notes: [],
-  note: {},
+  note: {
+    text: '',
+    product_id: ''
+  },
   count: 0,
   ...defaultPagination
 });
