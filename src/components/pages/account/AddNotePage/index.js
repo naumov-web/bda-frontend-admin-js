@@ -4,24 +4,13 @@ import { Link, useHistory } from 'react-router-dom';
 import { Form, Button, Alert } from 'react-bootstrap';
 import FormContainer from '../../../hocs/FormContainer';
 import Select from 'react-select';
-// Styles
-import './styles.sass';
 // Services
 import { load as loadProducts } from '../../../../services/products';
-
-const transformSelectOptions = (items, productId) => {
-  const result = [];
-
-  items.forEach((item) => {
-    result.push({
-      value: item.id,
-      label: item.name,
-      isSelected: item.id === productId
-    });
-  });
-
-  return result;
-};
+import { createProductNote } from '../../../../services/notes';
+// Utils
+import transformSelectOptions from '../../../../utils/transformers/reactSelectTransformer';
+// Styles
+import './styles.sass';
 
 export default () => {
 
@@ -41,6 +30,13 @@ export default () => {
 
   const handle = (e) => {
     e.preventDefault();
+    createProductNote(
+      {
+        text,
+        product_id
+      },
+      { history }
+    );
   };
 
   return <div className="notes-page wide-page page list-page">

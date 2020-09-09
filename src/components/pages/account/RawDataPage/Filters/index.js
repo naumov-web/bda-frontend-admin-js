@@ -7,29 +7,16 @@ import httpBuildQuery from 'http-build-query';
 import queryString from 'query-string';
 import DatePicker from 'react-datepicker';
 import Select from 'react-select';
-
 // Services
 import { load } from '../../../../../services/products';
-
+// Utils
+import transformSelectOptions from '../../../../../utils/transformers/reactSelectTransformer';
+// Styles
 import 'react-datepicker/dist/react-datepicker.css';
 import './styles.sass';
 
 const getLink = (baseUrl, params) => {
   return baseUrl + '?' + httpBuildQuery(snakeCaseKeys(params));
-};
-
-const transformSelectOptions = (items, productId) => {
-  const result = [];
-
-  items.forEach((item) => {
-    result.push({
-      value: item.id,
-      label: item.name,
-      isSelected: item.id === productId
-    });
-  });
-
-  return result;
 };
 
 export default ({ baseUrl }) => {
