@@ -1,3 +1,6 @@
+import camelcaseKeys from 'camelcase-keys';
+// Redux methods
+import { createSetNotesAction } from '../store/notes/actionCreators';
 // API methods
 import { 
   createProductNote as createProductNoteRequest,
@@ -12,9 +15,10 @@ export const createProductNote = async (params, { history }) => {
   }
 }
 
-export const getNotesList = async(params, { dispatch }) => {
+export const loadNotesList = async(params, { dispatch }) => {
   try {
     const data = await getNotesRequest(params);
+    dispatch(createSetNotesAction(camelcaseKeys(data.items), data.count));
   } catch (e) {
   }
 };
