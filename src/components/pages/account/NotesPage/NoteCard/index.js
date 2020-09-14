@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Card } from 'react-bootstrap';
 import moment from 'moment';
+// Components
+import DeleteButton from '../../../../ui/DeleteButton';
+import EditLink from '../../../../ui/EditLink';
 // Styles
 import './styles.sass';
 
@@ -22,14 +25,20 @@ export default ({ id, productName, updatedAt, text }) => {
 
   return <Card className="note">
     <Card.Body>
-      <div className="note-product-name">
-        <b>{ productName }</b>
+      <div className="note-content">
+        <div className="note-product-name">
+          <b>{ productName }</b>
+        </div>
+        <div className="note-updated">
+          { moment(updatedAt).format('YYYY-MM-DD HH:mm') }
+        </div>
+        <div className="note-text">
+          { showText(text) }
+        </div>
       </div>
-      <div className="note-updated">
-        { moment(updatedAt).format('YYYY-MM-DD HH:mm') }
-      </div>
-      <div className="note-text">
-        { showText(text) }
+      <div className="note-actions">
+        <EditLink link="" />
+        <DeleteButton onClick={() => {}} />
       </div>
     </Card.Body>
   </Card>;

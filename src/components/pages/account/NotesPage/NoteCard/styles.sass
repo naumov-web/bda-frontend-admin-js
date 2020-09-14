@@ -1,5 +1,17 @@
 @import '../../../../../assets/styles/variables.sass'
 
+.note
+  > div
+    display: grid
+    grid-template-columns: auto 150px
+    grid-column-gap: $default-margin
+
+    .note-actions
+      text-align: center
+
+      .edit-link
+        margin-bottom: $default-margin
+
 .note-updated
   font-size: 12px
 

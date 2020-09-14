@@ -10,7 +10,9 @@ const initialState = Immutable({
     product_id: ''
   },
   count: 0,
-  ...defaultPagination
+  ...defaultPagination,
+  sortBy: 'updated_at',
+  sortDirection: 'desc'
 });
 
 // Reducer

@@ -37,7 +37,7 @@ export default () => {
     <div className="filters-row">
     </div>
     <div className="items-row">
-      {notes.map(note => <NoteCard {...note}/>)}
+      {notes.map(note => <NoteCard key={`note-${note.id}`} {...note}/>)}
     </div>
   </div>;
 
