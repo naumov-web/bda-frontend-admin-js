@@ -7,7 +7,7 @@ import EditLink from '../../../../ui/EditLink';
 // Styles
 import './styles.sass';
 
-export default ({ id, productName, updatedAt, text }) => {
+export default ({ id, productName, updatedAt, text, onDeleteClick }) => {
 
   const shortTextLimit = 500;
   let [expandedText, setExpandedText] = useState(false);
@@ -38,7 +38,7 @@ export default ({ id, productName, updatedAt, text }) => {
       </div>
       <div className="note-actions">
         <EditLink link="" />
-        <DeleteButton onClick={() => {}} />
+        <DeleteButton onClick={() => onDeleteClick(id) } />
       </div>
     </Card.Body>
   </Card>;
