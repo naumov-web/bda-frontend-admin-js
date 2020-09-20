@@ -21,5 +21,10 @@ export const getNotes = (params) => createGetRequest(
 
 export const deleteNote = (id) => createDeleteRequest(
   account,
-  NOTE_URL.replace('{note}', id),
+  NOTE_URL.replace('{note}', id)
+);
+
+export const getNote = id => createGetRequest(
+  account,
+  NOTE_URL.replace('{note}', id)
 );

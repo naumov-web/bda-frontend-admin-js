@@ -37,7 +37,7 @@ export default ({ id, productName, updatedAt, text, onDeleteClick }) => {
         </div>
       </div>
       <div className="note-actions">
-        <EditLink link="" />
+        <EditLink link={`/notes/edit/${id}`} />
         <DeleteButton onClick={() => onDeleteClick(id) } />
       </div>
     </Card.Body>

@@ -13,7 +13,7 @@ import HandbookProductsPage from '../pages/account/HandbookProductsPage';
 import RawDataPage from '../pages/account/RawDataPage';
 import RawDataItemPage from '../pages/account/RawDataItemPage';
 import NotesPage from '../pages/account/NotesPage';
-import AddNotePage from '../pages/account/AddNotePage';
+import FormNotePage from '../pages/account/FormNotePage';
 // Components
 import Menu from '../Menu';
 import AccountGuard from '../hocs/AccountGuard';
@@ -60,7 +60,8 @@ const Routes = () => {
                 <Route path="/raw-data" exact component={RawDataPage} />
                 <Route path="/raw-data/:id" exact component={RawDataItemPage} />
                 <Route path="/notes" exact component={NotesPage} />
-                <Route path="/notes/add" exact component={AddNotePage} />
+                <Route path="/notes/edit/:id" exact component={FormNotePage} />
+                <Route path="/notes/add" exact component={FormNotePage} />
               </AccountGuard>
             </Col>
           </Row>

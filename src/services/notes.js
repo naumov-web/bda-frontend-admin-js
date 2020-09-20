@@ -1,11 +1,12 @@
 import camelcaseKeys from 'camelcase-keys';
 // Redux methods
-import { createSetNotesAction } from '../store/notes/actionCreators';
+import { createSetNotesAction, createSetNoteAction } from '../store/notes/actionCreators';
 // API methods
 import { 
   createProductNote as createProductNoteRequest,
   getNotes as getNotesRequest,
-  deleteNote as deleteNoteRequest
+  deleteNote as deleteNoteRequest,
+  getNote as getNoteRequest
 } from '../utils/apis/notes.api';
 
 export const createProductNote = async (params, { history }) => {
@@ -28,6 +29,14 @@ export const deleteNote = async(id, pagination, { dispatch }) => {
   try {
     await deleteNoteRequest(id);
     loadNotesList(pagination, { dispatch });
+  } catch (e) {
+  }
+};
+
+export const loadNote = async(id, { dispatch }) => {
+  try {
+    const data = await getNoteRequest(id);
+    dispatch(createSetNoteAction(data));
   } catch (e) {
   }
 };
