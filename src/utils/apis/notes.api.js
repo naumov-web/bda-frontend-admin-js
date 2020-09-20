@@ -1,5 +1,6 @@
 import { account } from './base.api';
 import createPostRequest from '../requests/createPostRequest';
+import createPutRequest from '../requests/createPutRequest';
 import createGetRequest from '../requests/createGetRequest';
 import createDeleteRequest from '../requests/createDeleteRequest';
 
@@ -16,6 +17,12 @@ export const createProductNote = (params) => createPostRequest(
 export const getNotes = (params) => createGetRequest(
   account, 
   NOTES_URL,
+  params
+);
+
+export const updateNote = (id, params) => createPutRequest(
+  account,
+  NOTE_URL.replace('{note}', id),
   params
 );
 

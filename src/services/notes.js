@@ -5,6 +5,7 @@ import { createSetNotesAction, createSetNoteAction } from '../store/notes/action
 import { 
   createProductNote as createProductNoteRequest,
   getNotes as getNotesRequest,
+  updateNote as updateNoteRequest,
   deleteNote as deleteNoteRequest,
   getNote as getNoteRequest
 } from '../utils/apis/notes.api';
@@ -16,6 +17,12 @@ export const createProductNote = async (params, { history }) => {
   } catch (e) {
   }
 }
+export const updateNote = async(id, params, { history }) => {
+  try {
+    await updateNoteRequest(id, params);
+    history.push('/notes');
+  } catch (e) {}
+};
 
 export const loadNotesList = async(params, { dispatch }) => {
   try {

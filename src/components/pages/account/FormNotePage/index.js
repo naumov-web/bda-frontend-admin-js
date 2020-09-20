@@ -6,7 +6,7 @@ import FormContainer from '../../../hocs/FormContainer';
 import Select from 'react-select';
 // Services
 import { load as loadProducts } from '../../../../services/products';
-import { createProductNote, loadNote } from '../../../../services/notes';
+import { createProductNote, loadNote, updateNote } from '../../../../services/notes';
 // Utils
 import 
   transformSelectOptions, 
@@ -20,7 +20,6 @@ export default () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const products = useSelector(data => data.products.products);
-  const notes = useSelector(state => state.notes.notes);
   const note = useSelector(state => state.notes.note);
   const { id } = useParams();
 
@@ -37,15 +36,31 @@ export default () => {
     }
   }, []);
 
+  useEffect(() => {
+    setText(note.text);
+    setProductId(note.product_id);
+  }, [note.text, note.product_id]);
+
   const handle = (e) => {
     e.preventDefault();
-    createProductNote(
-      {
-        text,
-        product_id
-      },
-      { history }
-    );
+    if (id) {
+      updateNote(
+        id,
+        {
+          text,
+          product_id
+        },
+        { history }
+      );
+    } else {
+      createProductNote(
+        {
+          text,
+          product_id
+        },
+        { history }
+      );
+    }
   };
 
   return <div className="notes-page wide-page page list-page">
