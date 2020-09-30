@@ -1,6 +1,10 @@
 import camelcaseKeys from 'camelcase-keys';
 // Redux methods
-import { createSetNotesAction, createSetNoteAction } from '../store/notes/actionCreators';
+import { 
+  createSetNotesAction, 
+  createSetNoteAction,
+  createSetPaginationAction
+} from '../store/notes/actionCreators';
 // API methods
 import { 
   createProductNote as createProductNoteRequest,
@@ -9,6 +13,8 @@ import {
   deleteNote as deleteNoteRequest,
   getNote as getNoteRequest
 } from '../utils/apis/notes.api';
+// Utils
+import { removeEmptyFields } from '../utils/objects';
 
 export const createProductNote = async (params, { history }) => {
   try {
@@ -26,6 +32,9 @@ export const updateNote = async(id, params, { history }) => {
 
 export const loadNotesList = async(params, { dispatch }) => {
   try {
+    dispatch(createSetPaginationAction(
+      camelcaseKeys(removeEmptyFields(params)))
+    );
     const data = await getNotesRequest(params);
     dispatch(createSetNotesAction(camelcaseKeys(data.items), data.count));
   } catch (e) {

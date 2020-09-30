@@ -6,11 +6,11 @@ import { Form } from 'react-bootstrap';
 // Components
 import HandbookMenu from '../../../HandbookMenu';
 import Table from '../../../Table';
+import Pagination from '../../../Pagination';
 // Services
 import { load, setPriority } from '../../../../services/products';
 // Styles
 import './styles.sass';
-import Pagination from '../../../Pagination';
 
 export default () => {
 

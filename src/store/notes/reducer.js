@@ -1,5 +1,5 @@
 import Immutable from 'seamless-immutable';
-import { SET_NOTES, SET_NOTE } from './actionTypes';
+import { SET_NOTES, SET_NOTE, SET_PAGINATION } from './actionTypes';
 import defaultPagination from '../../config/pagination';
 
 // Initial state
@@ -26,6 +26,13 @@ export default function reduce(state = initialState, action = {}) {
     case SET_NOTE:
       return state.merge({
           note: action.note
+      });
+    case SET_PAGINATION:
+      return state.merge({
+        limit: action.limit,
+        offset: action.offset,
+        sortBy: action.sortBy,
+        sortDirection: action.sortDirection,
       });
     default:
       return state;

@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import queryString from 'query-string';
 import { Card } from 'react-bootstrap';
 // Components
 import NoteCard from './NoteCard';
+import Pagination from '../../../Pagination';
 // Services
 import { load as loadProducts } from '../../../../services/products';
 import { loadNotesList, deleteNote } from '../../../../services/notes';
@@ -16,8 +18,10 @@ export default () => {
 
   const baseUrl = '/notes';
   const dispatch = useDispatch();
+  const history = useHistory();
   const products = useSelector(data => data.products.products);
   const notes = useSelector(data => data.notes.notes);
+  const count = useSelector(state => state.notes.count);
   const pagination = useSelector(
     data => (
       { 
@@ -30,7 +34,35 @@ export default () => {
   );
 
   useEffect(() => {
-    loadNotesList(pagination, { dispatch });
+
+    if (history.location.search) {
+      const params = queryString.parse(history.location.search);
+
+      loadNotesList(params, {
+        dispatch
+      });
+    } else {
+      loadNotesList(pagination, {
+        dispatch
+      });
+    }
+
+    history.listen(
+      location => {
+        if (location.pathname === baseUrl && location.search !== '') {
+          const params = queryString.parse(history.location.search);
+
+          loadNotesList(params, {
+            dispatch
+          });
+        }
+        if (location.pathname === baseUrl && location.search === '') {
+          loadNotesList(pagination, {
+            dispatch
+          });
+        }
+      }
+    );
 
     if (products.length === 0) {
       loadProducts({}, { dispatch });
@@ -48,6 +80,13 @@ export default () => {
     }
   };
 
+  const getLink = ({sortBy, sortDirection, limit, offset, baseUrl}) => 
+  `${baseUrl}?limit=${limit}&offset=${offset}&sort_by=${sortBy}&sort_direction=${sortDirection}`;
+
+  const onChangePage = (params) => {
+    history.push(getLink(params));
+  };
+
   return <div className="notes-page wide-page page list-page">
     <h3>Заметки</h3>
     <div className="actions-row">
@@ -60,6 +99,12 @@ export default () => {
     <div className="items-row">
       {notes.map(note => <NoteCard key={`note-${note.id}`} {...note} onDeleteClick={onDeleteClick} />)}
     </div>
+    <Pagination 
+      {...pagination}
+      count={count}
+      baseUrl={baseUrl}
+      onChangePage={onChangePage}
+    />
   </div>;
 
 }
