@@ -6,6 +6,11 @@ const menuItems = [
       visible: 'public'
     },
     {
+      link: '/report-schemas',
+      title: 'Схемы отчетов',
+      visible: 'protected'
+    },
+    {
       link: '/notes',
       title: 'Заметки',
       visible: 'protected'

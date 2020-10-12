@@ -2,15 +2,12 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import queryString from 'query-string';
-import { Card } from 'react-bootstrap';
 // Components
 import NoteCard from './NoteCard';
 import Pagination from '../../../Pagination';
 // Services
 import { load as loadProducts } from '../../../../services/products';
 import { loadNotesList, deleteNote } from '../../../../services/notes';
-// Utils
-import transformSelectOptions from '../../../../utils/transformers/reactSelectTransformer';
 // Styles
 import './styles.sass';
 
