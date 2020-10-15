@@ -23,6 +23,7 @@ export const createProductNote = async (params, { history }) => {
   } catch (e) {
   }
 }
+
 export const updateNote = async(id, params, { history }) => {
   try {
     await updateNoteRequest(id, params);
