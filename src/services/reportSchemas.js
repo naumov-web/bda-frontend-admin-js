@@ -1,4 +1,4 @@
-import camelcaseKeys from 'camelcase-keys';
+import snakecaseKeys from 'snakecase-keys';
 // Redux methods
 // API methods
 import { 
@@ -7,9 +7,13 @@ import {
 // Utils
 import { removeEmptyFields } from '../utils/objects';
 
-export const createProductNote = async (params, { history }) => {
+export const createReportSchema = async (params, { history }) => {
   try {
-    await createReportSchemaRequest(params);
+    await createReportSchemaRequest(
+      snakecaseKeys(
+        removeEmptyFields(params)
+      )
+    );
     history.push('/report-schemas');
   } catch (e) {
   }
