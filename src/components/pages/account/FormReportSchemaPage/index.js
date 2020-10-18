@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
+import moment from 'moment';
 import FormContainer from '../../../hocs/FormContainer';
+// Configs
+import { API_DATETIME_FORMAT } from '../../../../config/api';
+// Services
+import { createReportSchema } from '../../../../services/reportSchemas';
 // Styles
 import './styles.sass';
 
 export default () => {
+
   const defaultTypeId = 1;
+  const history = useHistory();
   const { id } = useParams();
 
   const [name, setName] = useState('');
@@ -20,7 +27,12 @@ export default () => {
     if (id) {
 
     } else {
-
+      createReportSchema({
+        name,
+        typeId: defaultTypeId,
+        datetimeFrom: moment(datetimeFrom).format(API_DATETIME_FORMAT),
+        datetimeTo: moment(datetimeTo).format(API_DATETIME_FORMAT)
+      }, { history });
     }
   }
 
