@@ -1,8 +1,14 @@
+import camelcaseKeys from 'camelcase-keys';
 import snakecaseKeys from 'snakecase-keys';
 // Redux methods
+import { 
+  createSetReportSchemasAction, 
+  createSetPaginationAction
+} from '../store/reportSchemas/actionCreators';
 // API methods
 import { 
-  createReportSchema as createReportSchemaRequest
+  createReportSchema as createReportSchemaRequest,
+  getReportSchemas as getReportSchemasRequest
 } from '../utils/apis/reportSchemas.api';
 // Utils
 import { removeEmptyFields } from '../utils/objects';
@@ -18,3 +24,14 @@ export const createReportSchema = async (params, { history }) => {
   } catch (e) {
   }
 }
+
+export const loadReportSchemasList = async(params, { dispatch }) => {
+  try {
+    dispatch(createSetPaginationAction(
+      camelcaseKeys(removeEmptyFields(params)))
+    );
+    const data = await getReportSchemasRequest(params);
+    dispatch(createSetReportSchemasAction(camelcaseKeys(data.items), data.count));
+  } catch (e) {
+  }
+};
