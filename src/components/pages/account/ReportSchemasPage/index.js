@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import queryString from 'query-string';
 // Components
 import Table from '../../../Table';
+import Pagination from '../../../Pagination';
 import DeleteButton from '../../../ui/DeleteButton';
 import EditLink from '../../../ui/EditLink';
 // Services
@@ -80,11 +81,29 @@ export default () => {
 
     history.listen(
       location => {
+        if (location.pathname === baseUrl && location.search !== '') {
+          const params = queryString.parse(history.location.search);
 
+          loadReportSchemasList(params, {
+            dispatch
+          });
+        }
+        if (location.pathname === baseUrl && location.search === '') {
+          loadReportSchemasList(pagination, {
+            dispatch
+          });
+        }
       }
     );
 
   }, []);
+
+  const getLink = ({sortBy, sortDirection, limit, offset, baseUrl}) => 
+  `${baseUrl}?limit=${limit}&offset=${offset}&sort_by=${sortBy}&sort_direction=${sortDirection}`;
+
+  const onChangePage = (params) => {
+    history.push(getLink(params));
+  };
 
   return <div className="report-schemas-page wide-page page list-page">
     <h3>Схемы отчетов</h3>
@@ -98,6 +117,12 @@ export default () => {
       items={reportSchemas}
       {...pagination}
       baseUrl={baseUrl}
+    />
+    <Pagination 
+      {...pagination}
+      count={count}
+      baseUrl={baseUrl}
+      onChangePage={onChangePage}
     />
   </div>;
 };

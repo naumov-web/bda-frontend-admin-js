@@ -30,8 +30,8 @@ export default () => {
       createReportSchema({
         name,
         typeId: defaultTypeId,
-        datetimeFrom: moment(datetimeFrom).format(API_DATETIME_FORMAT),
-        datetimeTo: moment(datetimeTo).format(API_DATETIME_FORMAT)
+        datetimeFrom: datetimeFrom ? moment(datetimeFrom).format(API_DATETIME_FORMAT) : null,
+        datetimeTo: datetimeTo ? moment(datetimeTo).format(API_DATETIME_FORMAT) : null
       }, { history });
     }
   }
