@@ -8,7 +8,7 @@ import Pagination from '../../../Pagination';
 import DeleteButton from '../../../ui/DeleteButton';
 import EditLink from '../../../ui/EditLink';
 // Services
-import { loadReportSchemasList } from '../../../../services/reportSchemas';
+import { loadReportSchemasList, deleteReportSchema } from '../../../../services/reportSchemas';
 // Styles
 import './styles.sass';
 
@@ -28,6 +28,17 @@ export default () => {
       }
     )
   );
+
+  const onDeleteClick = (id) => {
+    // eslint-disable-next-line no-restricted-globals
+    if (confirm('Вы уверены, что хотите удалить схему отчета?')) {
+      deleteReportSchema(
+        id,
+        pagination,
+        { dispatch }
+      );
+    }
+  };
 
   const columns = [
     {
@@ -59,7 +70,7 @@ export default () => {
       sortable: false,
       render: (item) => {
         return <>
-          <DeleteButton onClick={() => null } />
+          <DeleteButton onClick={() => onDeleteClick(item.id) } />
         </>;
       }
     }

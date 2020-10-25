@@ -8,7 +8,8 @@ import {
 // API methods
 import { 
   createReportSchema as createReportSchemaRequest,
-  getReportSchemas as getReportSchemasRequest
+  getReportSchemas as getReportSchemasRequest,
+  deleteReportSchema as deleteReportSchemaRequest
 } from '../utils/apis/reportSchemas.api';
 // Utils
 import { removeEmptyFields } from '../utils/objects';
@@ -32,6 +33,14 @@ export const loadReportSchemasList = async(params, { dispatch }) => {
     );
     const data = await getReportSchemasRequest(params);
     dispatch(createSetReportSchemasAction(camelcaseKeys(data.items), data.count));
+  } catch (e) {
+  }
+};
+
+export const deleteReportSchema = async(id, pagination, { dispatch }) => {
+  try {
+    await deleteReportSchemaRequest(id);
+    loadReportSchemasList(pagination, { dispatch });
   } catch (e) {
   }
 };
