@@ -66,6 +66,7 @@ const Routes = () => {
                 <Route path="/notes/add" exact component={FormNotePage} />
                 <Route path="/report-schemas" exact component={ReportSchemasPage} />
                 <Route path="/report-schemas/add" exact component={FormReportSchemaPage} />
+                <Route path="/report-schemas/edit/:id" exact component={FormReportSchemaPage} />
               </AccountGuard>
             </Col>
           </Row>
