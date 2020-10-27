@@ -43,6 +43,7 @@ export const loadReportSchemasList = async(params, { dispatch }) => {
 export const updateReportSchema = async (id, params, { history }) => {
   try {
     await updateReportSchemaRequest(
+      id,
       snakecaseKeys(
         removeEmptyFields(params)
       )
