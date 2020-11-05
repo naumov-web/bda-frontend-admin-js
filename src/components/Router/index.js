@@ -15,6 +15,8 @@ import RawDataItemPage from '../pages/account/RawDataItemPage';
 import NotesPage from '../pages/account/NotesPage';
 import FormNotePage from '../pages/account/FormNotePage';
 import ReportSchemasPage from '../pages/account/ReportSchemasPage';
+import ReportSchemaGraphsPage from '../pages/account/ReportSchemaGraphsPage';
+import FormReportSchemaGraphPage from '../pages/account/FormReportSchemaGraphPage';
 import FormReportSchemaPage from '../pages/account/FormReportSchemaPage';
 // Components
 import Menu from '../Menu';
@@ -67,6 +69,8 @@ const Routes = () => {
                 <Route path="/report-schemas" exact component={ReportSchemasPage} />
                 <Route path="/report-schemas/add" exact component={FormReportSchemaPage} />
                 <Route path="/report-schemas/edit/:id" exact component={FormReportSchemaPage} />
+                <Route path="/report-schemas/:id/graphs" exact component={ReportSchemaGraphsPage} />
+                <Route path="/report-schemas/:id/add-graph" exact component={FormReportSchemaGraphPage} />
               </AccountGuard>
             </Col>
           </Row>

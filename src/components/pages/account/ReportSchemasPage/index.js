@@ -7,6 +7,7 @@ import Table from '../../../Table';
 import Pagination from '../../../Pagination';
 import DeleteButton from '../../../ui/DeleteButton';
 import EditLink from '../../../ui/EditLink';
+import DetailLink from '../../../ui/DetailLink';
 // Services
 import { loadReportSchemasList, deleteReportSchema } from '../../../../services/reportSchemas';
 // Styles
@@ -55,6 +56,21 @@ export default () => {
       field: 'typeName',
       title: 'Тип схемы',
       sortable: false
+    },
+    {
+      title: '',
+      sortable: false,
+      render: (item) => {
+        return <>
+          {item.typeId === 1 && 
+            <DetailLink 
+              text="Графики" 
+              link={`/report-schemas/${item.id}/graphs`} 
+              size="sm" 
+            />
+          }
+        </>;
+      }
     },
     {
       title: '',
