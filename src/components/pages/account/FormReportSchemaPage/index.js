@@ -4,6 +4,8 @@ import { useParams, useHistory } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+// Components
+import DetailLink from '../../../ui/DetailLink';
 import FormContainer from '../../../hocs/FormContainer';
 // Configs
 import { API_DATETIME_FORMAT } from '../../../../config/api';
@@ -111,6 +113,9 @@ export default () => {
               </Form.Group>
             </div>
             <Form.Group controlId="submit">
+              {id && (
+                <DetailLink text="Графики" link={`/report-schemas/${id}/graphs`} />
+              )}
               <Button variant="success" type="submit">
                 Сохранить
               </Button>

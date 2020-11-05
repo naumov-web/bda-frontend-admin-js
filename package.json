@@ -9,6 +9,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "camelcase-keys": "^6.2.2",
+    "classnames": "^2.2.6",
     "dateformat": "^3.0.3",
     "font-awesome": "^4.7.0",
     "http-build-query": "^0.7.0",
