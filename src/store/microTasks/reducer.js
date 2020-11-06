@@ -1,18 +1,17 @@
 import Immutable from 'seamless-immutable';
-import { SET_PRODUCT_PRIORITIES } from './actionTypes';
+import { SET_MICRO_TASKS } from './actionTypes';
 
 // Initial state
 const initialState = Immutable({
-  productPriorities: []
+  microTasks: []
 });
 
 // Reducer
 export default function reduce(state = initialState, action = {}) {
   switch(action.type) {
-    case SET_PRODUCT_PRIORITIES:
+    case SET_MICRO_TASKS:
       return state.merge({
-        productPriorities: action.productPriorities,
-        count: action.count
+        microTasks: action.microTasks
       });
     default:
       return state;
