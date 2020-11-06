@@ -6,6 +6,7 @@ import handbooks from './handbooks/reducer';
 import rawData from './rawData/reducer';
 import notes from './notes/reducer';
 import reportSchemas from './reportSchemas/reducer';
+import microTasks from './microTasks/reducer';
 
 export {
     auth,
@@ -15,5 +16,6 @@ export {
     handbooks,
     rawData,
     notes,
-    reportSchemas
+    reportSchemas,
+    microTasks
 };

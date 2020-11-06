@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
-import FormContainer from '../../../hocs/FormContainer';
 import Select from 'react-select';
+// Components
+import FormContainer from '../../../hocs/FormContainer';
 // Services
 import { load as loadProducts } from '../../../../services/products';
 import { createProductNote, loadNote, updateNote } from '../../../../services/notes';
