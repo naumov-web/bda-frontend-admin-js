@@ -5,13 +5,9 @@ import { Form, Button } from 'react-bootstrap';
 import Select from 'react-select';
 // Components
 import FormContainer from '../../../hocs/FormContainer';
+import Prompt from '../../../ui/Prompt';
 // Services
 import { load as loadMicroTasks } from '../../../../services/microTasks';
-// Utils
-import 
-  transformSelectOptions, 
-  { getSelectedItem } 
-  from '../../../../utils/transformers/reactSelectTransformer';
 // Styles
 import './styles.sass';
 
@@ -23,6 +19,8 @@ export default () => {
 
   const [name, setName] = useState(null);
   const [micro_task_id, setMicroTaskId] = useState(null);
+  const [multiplex, setMultiplex] = useState(1);
+  const [data_schema, setDataSchema] = useState(null);
 
   useEffect(() => {
     if (microTasks.length === 0) {
@@ -56,14 +54,47 @@ export default () => {
             </Form.Group>
             <Form.Group controlId="micro_task_id">
               <Form.Label>Микрозадача:</Form.Label>
-              <Select 
-                  options={transformSelectOptions(microTasks, null || micro_task_id)} 
-                  onChange={item => {
-                    setMicroTaskId(item.value)
-                  }}
-                  defaultInputValue={null || micro_task_id}
-                  value={getSelectedItem(microTasks, null || micro_task_id)}
-                />
+              <Form.Control 
+                as="select"
+                onChange={e => setMicroTaskId(e.target.value)}
+                defaultValue={null || micro_task_id}
+              >
+                {microTasks.map(
+                  microTask => <option
+                    value={microTask.id}
+                  >
+                    {microTask.name}
+                  </option>
+                )}
+              </Form.Control>
+            </Form.Group>
+            <Form.Group controlId="multiplex">
+              <Form.Label>Множитель:</Form.Label>
+              <Form.Control 
+                onChange={(e:any) => setMultiplex(e.target.value)} 
+                type="number" 
+                placeholder="Введите множитель графика" 
+                defaultValue={multiplex}
+                required
+              />
+              <Prompt 
+                text={`Вещественное число, на которое будет умножена каждая координата
+                      по оси ординат данного графика.`}
+              />
+            </Form.Group>
+            <Form.Group controlId="data_schema">
+              <Form.Label>Схема данных:</Form.Label>
+              <Form.Control 
+                type="text" 
+                placeholder="Выберите схему данных для графика" 
+                defaultValue={data_schema}
+                required
+                readonly="readonly"
+              />
+              <Prompt 
+                text={`Вам необходимо выбрать элемент структуры JSON, содержащий числовое значение, 
+                      которое будет использоваться при построении графика.`}
+              />
             </Form.Group>
             <Form.Group controlId="submit">
               <Button variant="success" type="submit">
