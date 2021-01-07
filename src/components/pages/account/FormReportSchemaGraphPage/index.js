@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
-import Select from 'react-select';
+import ReactJson from 'react-json-view';
 // Components
 import FormContainer from '../../../hocs/FormContainer';
 import Prompt from '../../../ui/Prompt';
 // Services
 import { load as loadMicroTasks } from '../../../../services/microTasks';
+import { loadItemExample } from '../../../../services/rawData';
 // Styles
 import './styles.sass';
 
@@ -15,6 +16,7 @@ export default () => {
 
   const dispatch = useDispatch();
   const microTasks = useSelector(data => data.microTasks.microTasks);
+  const rawDataItemExample = useSelector(data => data.rawData.rawDataItemExample);
   const { id } = useParams();
 
   const [name, setName] = useState(null);
@@ -34,6 +36,14 @@ export default () => {
 
   const handle = (e) => {
     e.preventDefault();
+  };
+
+  const onSelectMicroTaskId = (id) => {
+    setMicroTaskId(id);
+    loadItemExample(
+      id,
+      { dispatch }
+    );
   };
 
   return <div className="notes-page wide-page page list-page">
@@ -56,11 +66,12 @@ export default () => {
               <Form.Label>Микрозадача:</Form.Label>
               <Form.Control 
                 as="select"
-                onChange={e => setMicroTaskId(e.target.value)}
+                onChange={e => onSelectMicroTaskId(e.target.value)}
                 defaultValue={null || micro_task_id}
               >
                 {microTasks.map(
                   microTask => <option
+                    key={`micro-task-option-${microTask.id}`}
                     value={microTask.id}
                   >
                     {microTask.name}
@@ -89,12 +100,24 @@ export default () => {
                 placeholder="Выберите схему данных для графика" 
                 defaultValue={data_schema}
                 required
-                readonly="readonly"
+                readOnly="readonly"
               />
               <Prompt 
                 text={`Вам необходимо выбрать элемент структуры JSON, содержащий числовое значение, 
                       которое будет использоваться при построении графика.`}
               />
+              {rawDataItemExample && (
+                <ReactJson 
+                  src={rawDataItemExample.data} 
+                  theme="monokai" 
+                  displayDataTypes={false} 
+                  style={
+                    {
+                      width: "100%"
+                    }
+                  }
+                />
+              )}
             </Form.Group>
             <Form.Group controlId="submit">
               <Button variant="success" type="submit">

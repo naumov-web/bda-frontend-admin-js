@@ -4,11 +4,12 @@ import {
   createSetIsLoadingAction,
   createSetRawDataAction,
   createSetPaginationAction,
-  createSetRawDataItemAction
+  createSetRawDataItemAction,
+  createSetRawDataItemExampleAction
 } from '../store/rawData/actionCreators';
 
 // API methods
-import { getRawData, getRawDataItem } from '../utils/apis/rawData.api';
+import { getRawData, getRawDataItem, getRawDataExample } from '../utils/apis/rawData.api';
 
 export const load = async (params, { dispatch }) => {
   dispatch(createSetIsLoadingAction(true));
@@ -28,3 +29,15 @@ export const loadItem = async(id, { dispatch }) => {
   } catch (e) {
   }
 };
+
+export const loadItemExample = async (microTaskId, { dispatch }) => {
+  try {
+    const data = await getRawDataExample(microTaskId);
+    if (data.count) {
+      dispatch(createSetRawDataItemExampleAction(data.items[0]));
+    } else {
+      dispatch(createSetRawDataItemExampleAction(null));
+    }
+  } catch (e) {
+  }
+}

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import ReactJson from 'react-json-view'
+import ReactJson from 'react-json-view';
 // Services
 import { loadItem } from '../../../../services/rawData';
 
@@ -29,7 +29,7 @@ export default () => {
         <b>Дата и время создания записи: </b> { rawDataItem.date_time }
       </p>
       <p>
-        <b>Наименование товара:</b> { rawDataItem.product.name }
+        <b>Наименование товара:</b> { rawDataItem.product ? rawDataItem.product.name : '-' }
       </p>
       <p>
         <b>Источник данных: </b> { rawDataItem.data_source.name }
